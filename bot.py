@@ -1,3 +1,19 @@
+import threading
+import requests
+import time
+ 
+def keep_alive():
+    while True:
+        try:
+            requests.get("https://scornful-andreana-moxi35-c66f799a.koyeb.app/")
+        except:
+            pass
+        time.sleep(90)  # Ping every 5 minutes
+ 
+threading.Thread(target=keep_alive, daemon=True).start()
+
+
+
 import logging
 import logging.config
 # Credit @LazyDeveloper.
