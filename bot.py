@@ -12,6 +12,16 @@ def keep_alive():
  
 threading.Thread(target=keep_alive, daemon=True).start()
 
+import time
+import asyncio
+
+# Sync time at startup (workaround for time drift)
+async def fix_time_drift():
+    await asyncio.sleep(1)
+    time.time = lambda: int(time.time())
+
+asyncio.get_event_loop().run_until_complete(fix_time_drift())
+
 
 
 import logging
